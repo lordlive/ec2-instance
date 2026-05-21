@@ -11,7 +11,7 @@ terraform {
     region = "eu-central-1"
 
     # Recommended for modern Terraform (v1.10+)
-    use_lockfile = true
+    # use_lockfile = true
 
     # Required for older versions (legacy)
     # dynamodb_table = "terraform-state-locks"
