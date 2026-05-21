@@ -46,3 +46,6 @@ jobs:
 
     - name: Plan Terraform deployment
       run: terraform -chdir=${TERRAFORM_DIR} plan
+
+    - name: Apply Terraform deployment
+      run: terraform -chdir=${TERRAFORM_DIR} apply -auto-approve

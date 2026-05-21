@@ -38,11 +38,8 @@ jobs:
            aws --version
            aws sts get-caller-identity
 
-    # - name: Validate Terraform configuration
-    #   run: terraform -chdir=${TERRAFORM_DIR} fmt -check
+    - name: Initialize Terraform
+      run: terraform -chdir=${TERRAFORM_DIR} init
 
-    # - name: Initialize Terraform
-    #   run: terraform -chdir=${TERRAFORM_DIR} init
-
-    # - name: Plan Terraform deployment
-    #   run: terraform -chdir=${TERRAFORM_DIR} plan
+    - name: Destroy Terraform deployment
+      run: terraform -chdir=${TERRAFORM_DIR} destroy -auto-approve
