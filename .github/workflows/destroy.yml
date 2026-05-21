@@ -1,0 +1,41 @@
+name: Destroy Terraform IaC
+# Destroy EC2 instance using Terraform
+
+on:
+  push:
+
+env:
+  AWS_DEFAULT_REGION: eu-central-1
+  TERRAFORM_DIR: ./terraform
+  TF_VAR_app_name: ec2-instance
+  TF_VAR_app_version: "1.0.0"
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  destroy_aws:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Downloading the code from the repository to the virtual machine GitHub
+    - name: Checkout Source Code
+      uses: actions/checkout@v6
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_version: 1.5.4
+    - name: Test install app
+      run: |
+           echo "Testing app installation..."
+           terraform --version
+           aws --version
+           aws sts get-caller-identity
+
+    # - name: Validate Terraform configuration
+    #   run: terraform -chdir=${TERRAFORM_DIR} fmt -check
+
+    # - name: Initialize Terraform
+    #   run: terraform -chdir=${TERRAFORM_DIR} init
+
+    # - name: Plan Terraform deployment
+    #   run: terraform -chdir=${TERRAFORM_DIR} plan
