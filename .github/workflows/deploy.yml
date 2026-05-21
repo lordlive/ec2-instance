@@ -4,6 +4,13 @@ name: Deploy Terraform IaC
 on:
   push:
 
+permissions:
+  contents: read
+
+concurrency:  
+  group: ${{ github.workflow }}-${{ github.ref }}  
+  cancel-in-progress: true
+
 env:
   AWS_DEFAULT_REGION: eu-central-1
   TERRAFORM_DIR: ./terraform
