@@ -30,7 +30,7 @@ jobs:
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.5.4
+        terraform_version: 1.15.4
     - name: Test install app
       run: |
            echo "Testing app installation..."
